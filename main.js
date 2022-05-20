@@ -70,7 +70,7 @@ function treeHelper(dirPath, indent){
     }
 }
 function orgainzeFn(dirPath){
-
+      // 1. input -> directory path given
     //console.log("orgainze command implimented for",dirPath);
     let destPath;
     if(dirPath==undefined){
@@ -81,7 +81,7 @@ function orgainzeFn(dirPath){
     else{
         let doesExist = fs.existsSync(dirPath);
         if(doesExist){
-           
+            // 2. create -> organized_files -> directory
             destPath = path.join(dirPath,"orgainze_files");
            if(fs.existsSync(destPath)==false){
                fs.mkdirSync(destPath);       
@@ -93,8 +93,10 @@ function orgainzeFn(dirPath){
         }
     }
      orgainzeHelper(dirPath,destPath);
+    // 3. identify categories of all the files present in that input directory  ->
 }
 function orgainzeHelper(src, dest){
+    // 3. identify categories of all the files present in that input directory  ->
     let chlidNames = fs.readdirSync(src);
     //console.log(chlidNames);
     for(let i=0; i<chlidNames.length;i++){
@@ -104,6 +106,7 @@ function orgainzeHelper(src, dest){
             //console.log(chlidNames[i]);
             let category =getCategory(chlidNames[i]);
             console.log(chlidNames[i],"belongs to this",category);
+            // 4. copy / cut  files to that organized directory inside of any of category folder 
             sendFiles(childAddress,dest,category);
         }
     }
